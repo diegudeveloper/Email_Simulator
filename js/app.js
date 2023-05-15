@@ -11,21 +11,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //validacion del input
     function validar(e) {
+        console.log(e.target.parentElement)
         if(e.target.value.trim() === '') {
-            mensajeError()
-        } else {
-            console.log(e.target.value)
-        }
+            mensajeError(`El campo ${e.target.id} es Obligatorio`, e.target.parentElement)
+            return mensajeError;
+        } 
     }
 
     //creando mensaje de error
-    function mensajeError() {
+    function mensajeError(mensaje, referencia) {
         const error = document.createElement('P');
-        error.textContent = 'Campo Obligatorio';
-        console.log(error);
+        error.textContent = mensaje;
+       
         error.classList.add('bg-red-600', 'text-white', 'p-2', 'text-center');
 
-        formulario.appendChild(error)
+        referencia.appendChild(error)
+
+
     }
     
 });
