@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         limpiarAlerta(e.target.parentElement);
 
+        validarEmail(e.target.value);
+
     }
 
     //creando mensaje de error
@@ -44,6 +46,15 @@ document.addEventListener('DOMContentLoaded', function() {
         if (alerta) {
             alerta.remove();
         }
+    }
+
+    function validarEmail(email) {
+        // console.log('Desde la funcion');
+
+        const regex =  /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+        const comprueba = regex.test(email)
+
+        console.log(comprueba);
     }
     
 });
