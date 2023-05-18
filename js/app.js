@@ -4,26 +4,44 @@ document.addEventListener('DOMContentLoaded', function() {
     const inputAsunto = document.querySelector('#asunto')
     const inputMensaje = document.querySelector('#mensaje')
     const formulario = document.querySelector('#formulario');
+    const btnEnviar = document.querySelector('#formulario button[type="submit"]');
     
     inputEmail.addEventListener('blur', validar)
     inputAsunto.addEventListener('blur', validar)
     inputMensaje.addEventListener('blur', validar)
+
+    let correo = {
+        email: "",
+        asunto: "",
+        mensaje: ""
+    }
 
     //validacion del input
     function validar(e) {
         // console.log(e.target.parentElement)
         if(e.target.value.trim() === '') {
             mensajeError(`El campo ${e.target.id} es Obligatorio`, e.target.parentElement)
-            return mensajeError;
+            correo[e.target.id] = "";
+            comprobarEmail();
+            return;
         } 
 
         
         if(!validarEmail(e.target.value) && e.target.id === "email") {
-            mensajeError('El email no es valido',e.target.parentElement );
+            mensajeError('El email no es valido', e.target.parentElement );
+            correo[e.target.id] = "";
+            comprobarEmail();
             return;
         };
         
         limpiarAlerta(e.target.parentElement);
+
+        //Asignar los valores
+        correo[e.target.id] = e.target.value.trim().toLowerCase();
+        // console.log(correo)
+
+        comprobarEmail();
+
     }
 
     //creando mensaje de error
@@ -52,13 +70,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function validarEmail(email) {
-        // console.log('Desde la funcion');
-
         const regex =  /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
         const comprueba = regex.test(email)
         return comprueba;
+    }
 
-        console.log(comprueba);
+    function comprobarEmail() {
+        console.log(email);
+        if (Object.values(correo).includes('')) {
+            btnEnviar.classList.add('opacity-50');
+            btnEnviar.disabled = true;
+            return
+        } 
+        btnEnviar.classList.remove('opacity-50');
+        btnEnviar.disabled = false;
+        
     }
     
 });
