@@ -12,10 +12,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const formulario = document.querySelector('#formulario');
     const btnEnviar = document.querySelector('#formulario button[type="submit"]');
     const btnBorrar = document.querySelector('#formulario button[type="reset"]');
+    const spinner = document.querySelector('#spinner');
     
     inputEmail.addEventListener('blur', validar)
     inputAsunto.addEventListener('blur', validar)
     inputMensaje.addEventListener('blur', validar)
+
+    formulario.addEventListener('click', enviarFormulario);
 
     btnBorrar.addEventListener('click', function(e) {
         e.preventDefault();
@@ -28,6 +31,16 @@ document.addEventListener('DOMContentLoaded', function() {
         formulario.reset();
         comprobarEmail();
     })
+
+    function enviarFormulario(e) {
+        e.preventDefault()
+
+        spinner.classList.remove('hidden');
+    }
+
+    
+
+    
 
     //validacion del input
     function validar(e) {
