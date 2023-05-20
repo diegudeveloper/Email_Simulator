@@ -18,11 +18,12 @@ document.addEventListener('DOMContentLoaded', function() {
     inputAsunto.addEventListener('blur', validar)
     inputMensaje.addEventListener('blur', validar)
 
-    formulario.addEventListener('click', enviarFormulario);
+    btnEnviar.addEventListener('click', enviarFormulario);
 
     btnBorrar.addEventListener('click', function(e) {
         e.preventDefault();
 
+        //REINICIAR EL OBJETO
         correo.email = "",
         correo.asunto = "",
         correo.mensaje = "";
@@ -39,13 +40,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
         setTimeout(() => {
             spinner.classList.add('hidden');
+
+            correo.email = "",
+            correo.asunto = "",
+            correo.mensaje = "";
+
+            formulario.reset();
+            comprobarEmail();
         }, 3000);
     }
 
     
-
-    
-
     //validacion del input
     function validar(e) {
         // console.log(e.target.parentElement)
