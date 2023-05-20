@@ -24,13 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
 
         //REINICIAR EL OBJETO
-        correo.email = "",
-        correo.asunto = "",
-        correo.mensaje = "";
-
-
-        formulario.reset();
-        comprobarEmail();
+        resetFormulario();
     })
 
     function enviarFormulario(e) {
@@ -41,12 +35,18 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             spinner.classList.add('hidden');
 
-            correo.email = "",
-            correo.asunto = "",
-            correo.mensaje = "";
+            resetFormulario();
 
-            formulario.reset();
-            comprobarEmail();
+            const mensajeExito = document.createElement('P');
+            mensajeExito.classList.add('bg-green-500', 'alert-text-white', 'p-2', 'text-center', 'rounded-lg', 'mt-10', 'font-bold', 'text-sm', 'uppercase');
+            mensajeExito.textContent = 'Mensaje Enviado con Exito';
+
+            formulario.appendChild(mensajeExito);
+
+            setTimeout(() => {
+                mensajeExito.remove();
+            }, 3000)
+
         }, 3000);
     }
 
@@ -119,7 +119,16 @@ document.addEventListener('DOMContentLoaded', function() {
         } 
         btnEnviar.classList.remove('opacity-50');
         btnEnviar.disabled = false;
-        
+    }
+
+    function resetFormulario(){
+        correo.email = "",
+        correo.asunto = "",
+        correo.mensaje = "";
+
+
+        formulario.reset();
+        comprobarEmail();
     }
     
 });
