@@ -36,6 +36,10 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault()
 
         spinner.classList.remove('hidden');
+
+        setTimeout(() => {
+            spinner.classList.add('hidden');
+        }, 3000);
     }
 
     
