@@ -1,20 +1,33 @@
 document.addEventListener('DOMContentLoaded', function() {
-    
-    const inputEmail = document.querySelector('#email')
-    const inputAsunto = document.querySelector('#asunto')
-    const inputMensaje = document.querySelector('#mensaje')
-    const formulario = document.querySelector('#formulario');
-    const btnEnviar = document.querySelector('#formulario button[type="submit"]');
-    
-    inputEmail.addEventListener('blur', validar)
-    inputAsunto.addEventListener('blur', validar)
-    inputMensaje.addEventListener('blur', validar)
 
     let correo = {
         email: "",
         asunto: "",
         mensaje: ""
     }
+    
+    const inputEmail = document.querySelector('#email')
+    const inputAsunto = document.querySelector('#asunto')
+    const inputMensaje = document.querySelector('#mensaje')
+    const formulario = document.querySelector('#formulario');
+    const btnEnviar = document.querySelector('#formulario button[type="submit"]');
+    const btnBorrar = document.querySelector('#formulario button[type="reset"]');
+    
+    inputEmail.addEventListener('blur', validar)
+    inputAsunto.addEventListener('blur', validar)
+    inputMensaje.addEventListener('blur', validar)
+
+    btnBorrar.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        correo.email = "",
+        correo.asunto = "",
+        correo.mensaje = "";
+
+
+        formulario.reset();
+        comprobarEmail();
+    })
 
     //validacion del input
     function validar(e) {
