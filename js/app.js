@@ -2,11 +2,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let correo = {
         email: "",
+        emailCC: "",
         asunto: "",
         mensaje: ""
     }
     
     const inputEmail = document.querySelector('#email')
+    const inputEmailCc = document.querySelector('#emailCC')
     const inputAsunto = document.querySelector('#asunto')
     const inputMensaje = document.querySelector('#mensaje')
     const formulario = document.querySelector('#formulario');
@@ -15,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const spinner = document.querySelector('#spinner');
     
     inputEmail.addEventListener('blur', validar)
+    inputEmailCc.addEventListener('blur', validar)
     inputAsunto.addEventListener('blur', validar)
     inputMensaje.addEventListener('blur', validar)
 
@@ -54,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
     //validacion del input
     function validar(e) {
         // console.log(e.target.parentElement)
-        if(e.target.value.trim() === '') {
+        if(e.target.value.trim() === '' && e.target.id !== "emailCC") {
             mensajeError(`El campo ${e.target.id} es Obligatorio`, e.target.parentElement)
             correo[e.target.id] = "";
             comprobarEmail();
@@ -62,9 +65,11 @@ document.addEventListener('DOMContentLoaded', function() {
         } 
 
         
-        if(!validarEmail(e.target.value) && e.target.id === "email") {
-            mensajeError('El email no es valido', e.target.parentElement );
-            correo[e.target.id] = "";
+        // if(!validarEmail(e.target.value) && e.target.id === "email")
+        if(e.target.value.trim() !== '' && e.target.id === 'emailCC' && !validarEmail(e.target.value)){
+        
+            mensajeError('El email con Copia no es valido', e.target.parentElement );
+            correo[e.target.id] = e.target.value.trim().toLowerCase;
             comprobarEmail();
             return;
         };
